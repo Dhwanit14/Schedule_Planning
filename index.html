@@ -148,6 +148,20 @@
     @keyframes taskCompletePulse { 0% { transform: scale(1); filter: brightness(1); box-shadow: 0 0 0 transparent; } 50% { transform: scale(0.95); filter: brightness(1.5); box-shadow: 0 0 20px rgba(74,222,128,0.5); } 100% { transform: scale(1); filter: brightness(1); box-shadow: 0 0 0 transparent; } }
     
     .error-shake { animation: shake 0.3s ease; border-color: #ef4444 !important; }
+    
+    /* If the screen is smaller than 768px (standard mobile/tablet break) */
+    @media (max-width: 768px) {
+    .calendar-grid {
+        grid-template-columns: 1fr; /* Forces exactly 1 column */
+        }
+    .header-section {
+        padding: 10px;
+        }
+    .controls-top {
+        flex-direction: column; /* Stacks the buttons so they don't squish */
+        }
+    }
+    
 </style>
 <style id="dynamic-tag-styles"></style>
 </head>
