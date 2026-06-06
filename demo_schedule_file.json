@@ -1,0 +1,246 @@
+{
+  "tags": {
+    "cat-work": {
+      "name": "Work",
+      "color": "#38bdf8"
+    },
+    "cat-study": {
+      "name": "Study / Linux",
+      "color": "#4ade80"
+    },
+    "cat-cook": {
+      "name": "Cooking / Prep",
+      "color": "#fbbf24"
+    },
+    "cat-chill": {
+      "name": "Chilling",
+      "color": "#c084fc"
+    }
+  },
+  "tasks": {
+    "W1-Thursday-7": {
+      "title": "Work",
+      "category": "cat-work",
+      "notes": "Exact timeframe: 07:00 - 16:00",
+      "status": "complete",
+      "completed": true,
+      "duration": 9
+    },
+    "W1-Thursday-16": {
+      "title": "Cooking",
+      "category": "cat-cook",
+      "notes": "Exact timeframe: 16:00 - 18:45",
+      "status": "complete",
+      "completed": true,
+      "duration": 3
+    },
+    "W1-Thursday-20": {
+      "title": "Study block / Linux",
+      "category": "cat-study",
+      "notes": "Exact timeframe: 20:00 - 22:00",
+      "status": "complete",
+      "completed": true,
+      "duration": 2
+    },
+    "W1-Friday-7": {
+      "title": "Work",
+      "category": "cat-work",
+      "notes": "Exact timeframe: 07:00 - 16:00",
+      "status": "complete",
+      "completed": true,
+      "duration": 9
+    },
+    "W1-Friday-16": {
+      "title": "Cooking",
+      "category": "cat-cook",
+      "notes": "Exact timeframe: 16:00 - 18:45",
+      "status": "complete",
+      "completed": true,
+      "duration": 3
+    },
+    "W1-Friday-20": {
+      "title": "Study Block / Linux",
+      "category": "cat-study",
+      "notes": "Exact timeframe: 20:00 - 22:00",
+      "status": "complete",
+      "completed": true,
+      "duration": 2
+    },
+    "W1-Saturday-10": {
+      "title": "Study Block / Linux",
+      "category": "cat-study",
+      "notes": "Exact timeframe: 10:00 - 13:00",
+      "status": "complete",
+      "completed": true,
+      "duration": 3
+    },
+    "W1-Saturday-13": {
+      "title": "Chilling",
+      "category": "cat-chill",
+      "notes": "Exact timeframe: 13:00 - 15:15",
+      "status": "active",
+      "completed": false,
+      "duration": 2
+    },
+    "W1-Saturday-15": {
+      "title": "Study Block",
+      "category": "cat-study",
+      "notes": "Exact timeframe: 15:15 - 17:30",
+      "status": "active",
+      "completed": false,
+      "duration": 2
+    },
+    "W1-Saturday-17": {
+      "title": "Cooking",
+      "category": "cat-cook",
+      "notes": "Exact timeframe: 17:30 - 19:30",
+      "status": "active",
+      "completed": false,
+      "duration": 2
+    },
+    "W1-Saturday-19": {
+      "title": "Study Block",
+      "category": "cat-study",
+      "notes": "Exact timeframe: 19:30 - 22:00",
+      "status": "active",
+      "completed": false,
+      "duration": 3
+    },
+    "W1-Sunday-7": {
+      "title": "Work",
+      "category": "cat-work",
+      "notes": "Exact timeframe: 07:00 - 16:00",
+      "status": "active",
+      "completed": false,
+      "duration": 9
+    },
+    "W1-Sunday-16": {
+      "title": "Cooking",
+      "category": "cat-cook",
+      "notes": "Exact timeframe: 16:00 - 18:45",
+      "status": "active",
+      "completed": false,
+      "duration": 3
+    },
+    "W1-Sunday-20": {
+      "title": "Study block / Linux",
+      "category": "cat-study",
+      "notes": "Exact timeframe: 20:00 - 22:00",
+      "status": "active",
+      "completed": false,
+      "duration": 2
+    },
+    "W2-Monday-10": {
+      "title": "Work",
+      "category": "cat-work",
+      "notes": "Exact timeframe: 10:00 - 19:00",
+      "status": "active",
+      "completed": false,
+      "duration": 9
+    },
+    "W2-Monday-19": {
+      "title": "Cooking and eating",
+      "category": "cat-cook",
+      "notes": "Exact timeframe: 19:00 - 21:00",
+      "status": "active",
+      "completed": false,
+      "duration": 2
+    },
+    "W2-Monday-21": {
+      "title": "Study block / Linux",
+      "category": "cat-study",
+      "notes": "Exact timeframe: 21:30 - 23:30",
+      "status": "active",
+      "completed": false,
+      "duration": 3
+    },
+    "W2-Tuesday-9": {
+      "title": "Fresh up / Meal prep",
+      "category": "cat-cook",
+      "notes": "Exact timeframe: 09:00 - 11:30",
+      "status": "active",
+      "completed": false,
+      "duration": 2
+    },
+    "W2-Tuesday-11": {
+      "title": "Study Block",
+      "category": "cat-study",
+      "notes": "Exact timeframe: 11:30 - 13:30",
+      "status": "active",
+      "completed": false,
+      "duration": 2
+    },
+    "W2-Tuesday-13": {
+      "title": "Dressup",
+      "category": "cat-chill",
+      "notes": "Exact timeframe: 13:30 - 14:00",
+      "status": "active",
+      "completed": false,
+      "duration": 1
+    },
+    "W2-Tuesday-14": {
+      "title": "Work",
+      "category": "cat-work",
+      "notes": "Exact timeframe: 14:00 - 22:30",
+      "status": "active",
+      "completed": false,
+      "duration": 8
+    },
+    "W2-Wednesday-9": {
+      "title": "Fresh up / Meal prep",
+      "category": "cat-cook",
+      "notes": "Exact timeframe: 09:00 - 11:30",
+      "status": "active",
+      "completed": false,
+      "duration": 2
+    },
+    "W2-Wednesday-11": {
+      "title": "Study Block",
+      "category": "cat-study",
+      "notes": "Exact timeframe: 11:30 - 13:30",
+      "status": "active",
+      "completed": false,
+      "duration": 2
+    },
+    "W2-Wednesday-13": {
+      "title": "Dressup",
+      "category": "cat-chill",
+      "notes": "Exact timeframe: 13:30 - 14:00",
+      "status": "active",
+      "completed": false,
+      "duration": 1
+    },
+    "W2-Wednesday-14": {
+      "title": "Work",
+      "category": "cat-work",
+      "notes": "Exact timeframe: 14:00 - 22:30",
+      "status": "active",
+      "completed": false,
+      "duration": 8
+    },
+    "W2-Thursday-10": {
+      "title": "Work",
+      "category": "cat-work",
+      "notes": "Exact timeframe: 10:00 - 19:00",
+      "status": "active",
+      "completed": false,
+      "duration": 9
+    },
+    "W2-Thursday-19": {
+      "title": "Cooking and eating",
+      "category": "cat-cook",
+      "notes": "Exact timeframe: 19:00 - 21:00",
+      "status": "active",
+      "completed": false,
+      "duration": 2
+    },
+    "W2-Thursday-21": {
+      "title": "Study block / Linux",
+      "category": "cat-study",
+      "notes": "Exact timeframe: 21:30 - 23:30",
+      "status": "active",
+      "completed": false,
+      "duration": 3
+    }
+  }
+}
