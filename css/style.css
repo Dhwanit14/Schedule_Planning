@@ -1,0 +1,390 @@
+/* =========================================
+   CORE STYLES & THEME VARIABLES
+   ========================================= */
+:root {
+    --bg-color: #0f172a; 
+    --panel-bg: rgba(30, 41, 59, 0.7); 
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8; 
+    --border-color: rgba(148, 163, 184, 0.2); 
+    --color-accent: #4ade80;
+    --nav-height: 50px;
+}
+
+body { 
+    font-family: 'Inter', sans-serif; 
+    background-color: var(--bg-color); 
+    background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px); 
+    background-size: 30px 30px; 
+    color: var(--text-main); 
+    margin: 0; 
+    padding: 40px; 
+    min-height: 100vh; 
+    overflow-x: hidden; 
+    transition: background-color 0.5s; 
+}
+
+/* Fluid Viewport Scale Lock for Mobile Layouts */
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+}
+
+.mouse-glow { 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100vw; 
+    height: 100vh; 
+    pointer-events: none; 
+    z-index: -1; 
+    background: radial-gradient(400px circle at var(--mouse-x, 50vw) var(--mouse-y, 50vh), rgba(74, 222, 128, 0.08), transparent 40%); 
+}
+
+/* =========================================
+   HEADER & TOP CONTROLS
+   ========================================= */
+.header-section { max-width: 1400px; margin: 0 auto 30px auto; animation: fadeInDown 0.6s ease forwards; }
+.title-row { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px; }
+
+.title h1 { 
+    font-family: 'Fira Code', monospace; 
+    font-size: 28px; 
+    font-weight: 600; 
+    margin: 0 0 8px 0; 
+    color: var(--color-accent); 
+    text-shadow: 0 0 15px rgba(74, 222, 128, 0.25); 
+    letter-spacing: 0.5px; 
+}
+.title p { color: var(--text-muted); font-family: 'Fira Code', monospace; font-size: 13px; margin: 0;}
+
+.week-toggle-btn { background: rgba(15, 23, 42, 0.8); border: 1px solid var(--color-accent); color: var(--color-accent); padding: 10px 24px; border-radius: 8px; cursor: pointer; font-family: 'Fira Code', monospace; font-weight: 600; font-size: 14px; transition: all 0.2s; box-shadow: 0 0 15px rgba(74, 222, 128, 0.1); }
+.week-toggle-btn:hover { background: var(--color-accent); color: #000; box-shadow: 0 0 20px rgba(74, 222, 128, 0.3); transform: translateY(-2px); }
+
+.controls-top { display: flex; gap: 10px; margin-bottom: 20px;}
+.btn-secondary { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-color); color: var(--text-main); padding: 8px 16px; border-radius: 6px; cursor: pointer; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 13px; transition: all 0.2s; display: flex; align-items: center; gap: 6px; user-select: none; }
+.btn-secondary:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255,255,255,0.3); }
+.btn-danger { color: #f87171; border-color: rgba(248, 113, 113, 0.3); }
+.btn-danger:hover { background: rgba(248, 113, 113, 0.1); border-color: #f87171; }
+.btn-focus.active { background: var(--color-accent); color: #000; border-color: var(--color-accent); }
+
+/* =========================================
+   MOBILE DAY-NAVIGATION RIBBON
+   ========================================= */
+.mobile-nav-ribbon {
+    display: none;
+    position: relative;
+    background: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    margin-bottom: 15px;
+    padding: 5px;
+    justify-content: space-between;
+    backdrop-filter: blur(12px);
+}
+.mobile-nav-btn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-family: 'Fira Code', monospace;
+    font-weight: 600;
+    padding: 10px 0;
+    font-size: 13px;
+    cursor: pointer;
+    text-align: center;
+    transition: color 0.3s;
+    position: relative;
+    z-index: 2;
+}
+.mobile-nav-btn.active {
+    color: var(--text-main);
+}
+.nav-underline-glide {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    height: calc(100% - 10px);
+    width: calc(100% / 7 - 10px);
+    background: rgba(74, 222, 128, 0.15);
+    border: 1px solid var(--color-accent);
+    border-radius: 6px;
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* =========================================
+   DASHBOARD & FILTERS
+   ========================================= */
+.insights-wrapper { margin-bottom: 20px; background: var(--panel-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 16px 24px 24px 24px; backdrop-filter: blur(12px); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); }
+.insights-header { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 13px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+
+.insights-bar { display: flex; height: 12px; border-radius: 6px; background: rgba(15, 23, 42, 0.8); position: relative; }
+.insight-segment { height: 100%; width: 0%; transition: width 1s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.2s, filter 0.2s; position: relative; cursor: crosshair; }
+.insight-segment:first-child { border-top-left-radius: 6px; border-bottom-left-radius: 6px; }
+.insight-segment:last-child { border-top-right-radius: 6px; border-bottom-right-radius: 6px; }
+.insight-segment:hover { transform: scaleY(1.4); filter: brightness(1.2); z-index: 10; }
+
+.insight-segment::after {
+    content: attr(data-label); position: absolute; bottom: calc(100% + 10px); left: 50%;
+    transform: translateX(-50%) translateY(10px); background: #1e293b; color: #f8fafc;
+    padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 700;
+    font-family: 'Fira Code', monospace; opacity: 0; pointer-events: none;
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border: 1px solid var(--border-color); box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    white-space: nowrap; z-index: 20;
+}
+.insight-segment:hover::after { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+.filter-bar { display: flex; align-items: center; background: var(--panel-bg); backdrop-filter: blur(12px); border: 1px solid var(--border-color); border-radius: 12px; padding: 16px 24px; gap: 20px; flex-wrap: wrap; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); }
+.filter-label { font-size: 13px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-right: auto; }
+.controls { display: flex; gap: 12px; flex-wrap: wrap; }
+.controls button { background-color: transparent; border: 1px solid var(--border-color); border-radius: 6px; padding: 8px 16px; cursor: pointer; font-size: 13px; font-weight: 600; color: var(--text-muted); transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); font-family: 'Fira Code', monospace; }
+.controls button:hover { background-color: rgba(255, 255, 255, 0.05); color: var(--text-main); transform: translateY(-1px); }
+.controls .active { background-color: rgba(255, 255, 255, 0.15) !important; color: var(--text-main) !important; border-color: rgba(255, 255, 255, 0.3) !important; box-shadow: 0 0 10px rgba(255,255,255,0.05); }
+.action-btn { border-style: dashed !important; color: var(--text-main) !important; border-color: rgba(255,255,255,0.3) !important; }
+
+/* =========================================
+   CALENDAR GRID SYSTEM & MAIN CAROUSEL
+   ========================================= */
+.calendar-container { padding-bottom: 20px; }
+.calendar-grid { 
+    display: grid; 
+    grid-template-columns: repeat(7, minmax(160px, 1fr)); 
+    gap: 16px; 
+    max-width: 1400px; 
+    margin: 0 auto; 
+    transition: opacity 0.25s ease; 
+}
+
+.day-column { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 12px; 
+    background: var(--panel-bg); 
+    backdrop-filter: blur(10px); 
+    border: 1px solid var(--border-color); 
+    border-radius: 12px; 
+    padding: 16px; 
+    transition: filter 0.4s ease; 
+    min-height: 200px; 
+    opacity: 0; 
+    animation: columnStaggerEnter 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; 
+}
+.day-name { font-family: 'Fira Code', monospace; font-weight: 600; font-size: 14px; color: var(--text-main); text-transform: uppercase; padding-bottom: 12px; border-bottom: 1px solid var(--border-color); margin-bottom: 4px; letter-spacing: 1px; }
+
+body.focus-active .day-column:not(.is-today) { opacity: 0.3 !important; filter: grayscale(100%); pointer-events: none; }
+body.focus-active .day-column.is-today { box-shadow: 0 0 30px rgba(74, 222, 128, 0.1); border-color: rgba(74, 222, 128, 0.3); }
+
+/* Real-Time Horizon Tracker Laser */
+.realtime-horizon-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #ef4444, #f87171, #ef4444, transparent);
+    box-shadow: 0 0 8px #ef4444;
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* =========================================
+   TASK TASK CARDS & LIVE RADAR
+   ========================================= */
+.event { 
+    padding: 14px; 
+    border-radius: 8px; 
+    font-size: 13px; 
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1); 
+    position: relative; 
+    cursor: pointer; 
+    background: rgba(15, 23, 42, 0.8); 
+    border: 1px solid rgba(255, 255, 255, 0.05); 
+    overflow: hidden;
+}
+.event:hover { transform: translateX(4px) scale(1.02); box-shadow: -4px 4px 15px rgba(0,0,0,0.3); z-index: 10; }
+.event[draggable="true"]:active { cursor: grabbing; opacity: 0.7; transform: scale(0.95); }
+.day-column.drag-over { background: rgba(74, 222, 128, 0.05); border-color: var(--color-accent); }
+
+/* Live Progress Filling Meter Feature */
+.event-progress-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 0%;
+    background: rgba(255, 255, 255, 0.03);
+    border-right: 1px dashed rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+    transition: width 0.5s ease;
+}
+
+.event-time { font-family: 'Fira Code', monospace; display: block; font-size: 11px; font-weight: 400; margin-bottom: 8px; opacity: 0.7; pointer-events: none; position: relative; z-index: 2; }
+.event-title { font-weight: 600; line-height: 1.4; padding-right: 15px; display: inline-block; pointer-events: none; position: relative; z-index: 2; }
+.note-indicator { position: absolute; top: 12px; right: 12px; width: 6px; height: 6px; border-radius: 50%; }
+
+.add-task-btn { background: transparent; border: 1px dashed rgba(148, 163, 184, 0.3); color: var(--text-muted); padding: 12px; border-radius: 8px; text-align: center; font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); margin-top: auto; }
+.add-task-btn:hover { border-color: var(--color-accent); color: var(--color-accent); background: rgba(74, 222, 128, 0.05); transform: translateY(-2px); }
+
+/* Persistent Mobile FAB */
+.mobile-fab-add {
+    display: none;
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 56px;
+    height: 56px;
+    background: var(--color-accent);
+    color: #000;
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(74, 222, 128, 0.4);
+    cursor: pointer;
+    z-index: 90;
+}
+
+/* FAB Pulse Radar Animation */
+.fab-radar-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: 1px solid var(--color-accent);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: fabPulseRadar 2s infinite linear;
+}
+
+/* Task Completion Statuses & New Animations */
+.dimmed { opacity: 0.15; transform: scale(0.98); pointer-events: none; filter: grayscale(100%); }
+.event.completed { background: rgba(15, 23, 42, 0.3) !important; border-left-color: #475569 !important; opacity: 0.5; color: #64748b !important; box-shadow: none !important; }
+.event.completed .event-title::before { content: "// "; color: #475569; font-family: 'Fira Code', monospace; }
+.event.completed .event-title, .event.completed .event-time { text-decoration: line-through; }
+.event.just-completed { animation: taskCompletePulse 0.4s ease-out forwards; }
+.event.matrix-glitch .event-title { animation: textGlitchEffect 0.15s linear; }
+
+@keyframes liquidBleed { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.liquid-warning { background: linear-gradient(135deg, rgba(127, 29, 29, 0.8), rgba(239, 68, 68, 0.8), rgba(153, 27, 27, 0.8)) !important; background-size: 200% 200% !important; animation: liquidBleed 3s ease infinite !important; border: 1px solid #f87171 !important; box-shadow: 0 0 15px rgba(239, 68, 68, 0.4) !important; }
+.liquid-warning.overtime-heat-accel { animation-duration: 1.2s !important; }
+.liquid-warning .event-title, .liquid-warning .event-time { color: #fff !important; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+
+/* =========================================
+   MODALS, SHEETS & LAYOUTS
+   ========================================= */
+.modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(8px); z-index: 100; justify-content: center; align-items: center; animation: fadeIn 0.2s ease forwards; }
+.modal { background: #1e293b; padding: 32px; border-radius: 16px; box-shadow: 0 24px 48px rgba(0,0,0,0.6), 0 0 0 1px var(--border-color); text-align: left; max-width: 420px; width: 100%; animation: popInSpring 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+.modal h3 { font-family: 'Fira Code', monospace; margin: 0 0 16px 0; font-weight: 700; color: var(--text-main); font-size: 20px; }
+.modal h3::before { content: "> "; color: var(--color-accent); }
+
+/* Overlay Conflict Pulse Animation */
+.modal.conflict-pulse-warning {
+    animation: modalConflictWarningPulse 0.5s ease-in-out infinite alternate;
+}
+
+.context-menu { position: absolute; display: none; background: #1e293b; border: 1px solid var(--border-color); border-radius: 8px; padding: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 1000; animation: popInSpring 0.2s forwards; }
+.context-menu button { display: block; width: 100%; text-align: left; background: none; border: none; padding: 10px 16px; color: var(--text-main); cursor: pointer; border-radius: 4px; font-family: 'Inter', sans-serif; font-size: 13px; transition: background 0.2s; }
+.context-menu button:hover { background: rgba(255,255,255,0.05); }
+.context-menu .ctx-danger:hover { background: rgba(239, 68, 68, 0.1); color: #f87171; }
+
+.input-row { display: flex; gap: 12px; margin-bottom: 16px; }
+.modal input[type="text"], .modal select, .modal textarea { width: 100%; padding: 14px; border-radius: 8px; border: 1px solid var(--border-color); background: #0f172a; color: var(--text-main); font-family: 'Inter', sans-serif; font-size: 14px; box-sizing: border-box; transition: all 0.2s ease; }
+.modal input[type="text"] { margin-bottom: 16px; font-weight: 500; }
+.modal textarea { height: 100px; resize: none; margin-bottom: 24px; font-family: 'Fira Code', monospace; font-size: 12px; }
+.modal input:focus, .modal select:focus, .modal textarea:focus { outline: none; border-color: var(--color-accent); box-shadow: 0 0 0 2px rgba(74, 222, 128, 0.2); }
+
+.modal-buttons { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+.modal-btn { padding: 14px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 13px; transition: all 0.2s; font-family: 'Fira Code', monospace; }
+.btn-complete { background: rgba(74, 222, 128, 0.1); color: var(--color-accent); border: 1px solid var(--color-accent); }
+.btn-complete:hover { background: var(--color-accent); color: #000; }
+.btn-save { background: rgba(255, 255, 255, 0.05); color: var(--text-main); border: 1px solid var(--border-color); }
+.btn-save:hover { background: rgba(255, 255, 255, 0.1); }
+.btn-modal-danger { background: transparent; color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); }
+.btn-modal-danger:hover { background: #ef4444; color: #fff; }
+.btn-cancel { background: transparent; color: var(--text-muted); }
+.btn-cancel:hover { color: var(--text-main); }
+
+/* =========================================
+   ANIMATION KEYFRAMES
+   ========================================= */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes popInSpring { from { opacity: 0; transform: scale(0.9) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+@keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
+@keyframes columnStaggerEnter { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes taskCompletePulse { 0% { transform: scale(1); filter: brightness(1); } 50% { transform: scale(0.95); filter: brightness(1.5); box-shadow: 0 0 20px rgba(74,222,128,0.5); } 100% { transform: scale(1); filter: brightness(1); } }
+@keyframes textGlitchEffect { 0% { transform: translate(2px, 1px) skewX(5deg); opacity: 0.8; } 20% { transform: translate(-1px, -1px) skewX(-5deg); } 40% { transform: translate(1px, -1px) skewX(2deg); } 60% { transform: translate(-2px, 1px) skewX(0deg); } 100% { transform: translate(0); opacity: 1; } }
+@keyframes fabPulseRadar { 0% { transform: scale(1); opacity: 0.6; } 100% { transform: scale(1.6); opacity: 0; } }
+@keyframes modalConflictWarningPulse { from { border-color: var(--border-color); box-shadow: 0 0 0 transparent; } to { border-color: #f97316; box-shadow: 0 0 15px rgba(249, 115, 22, 0.3); } }
+@keyframes mobileSheetLift { from { transform: translateY(100%); } to { transform: translateY(0); } }
+
+.error-shake { animation: shake 0.3s ease; border-color: #ef4444 !important; }
+
+/* =========================================
+   📱 HIGH-END SMARTPHONE MEDIA QUERY OVERRIDES
+   ========================================= */
+@media (max-width: 768px) {
+    .header-section { margin-bottom: 15px; }
+    .title-row { align-items: center; margin-bottom: 15px; }
+    .title h1 { font-size: 22px; }
+    .week-toggle-btn { padding: 8px 16px; font-size: 12px; }
+    .controls-top { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 15px; }
+    .btn-secondary { justify-content: center; padding: 10px; font-size: 12px; }
+    .insights-wrapper, .filter-bar { padding: 14px; margin-bottom: 15px; border-radius: 10px; }
+    
+    .mobile-nav-ribbon, .mobile-fab-add { display: flex; }
+    
+    /* Horizontal Carousel Engine via Native CSS Snap Layouts */
+    .calendar-container {
+        position: relative;
+        overflow: hidden;
+        height: calc(100vh - 290px);
+    }
+    .calendar-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        gap: 0;
+        height: 100%;
+        width: 100%;
+        -webkit-overflow-scrolling: touch;
+    }
+    .calendar-grid::-webkit-scrollbar { display: none; }
+    
+    .day-column {
+        flex: 0 0 100%;
+        min-width: 100%;
+        height: 100%;
+        scroll-snap-align: start;
+        box-sizing: border-box;
+        border-radius: 0;
+        background: transparent;
+        border: none;
+        padding: 5px;
+        overflow-y: auto;
+        animation: none; /* Handled via scrolling state */
+        opacity: 1;
+    }
+    .day-name { display: none; }
+    .add-task-btn { display: none; } /* Handled via Floating FAB Button */
+    
+    /* Bottom Drawer Sheet Lift Configuration */
+    .modal-overlay { align-items: flex-end; }
+    .modal {
+        max-width: 100%;
+        border-radius: 20px 20px 0 0;
+        padding: 24px;
+        animation: mobileSheetLift 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+}
