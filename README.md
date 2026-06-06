@@ -1,4 +1,4 @@
-# 🗓️ Weekly Schedule Planner
+# 🗓️ [Weekly Schedule Planner](https://dhwanit14.github.io/Schedule_Planning/)
 
 A sleek, privacy-first weekly planner built entirely with HTML, CSS, and vanilla JavaScript. 
 
