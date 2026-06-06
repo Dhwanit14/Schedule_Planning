@@ -24,15 +24,6 @@ body {
     transition: background-color 0.5s; 
 }
 
-/* Fluid Viewport Scale Lock for Mobile Layouts */
-@media (max-width: 768px) {
-    body {
-        padding: 15px 10px;
-        overflow-x: hidden; /* Still prevents accidental horizontal wobbling */
-        overflow-y: auto;   /* Unlocks vertical scrolling! */
-    }
-}
-
 .mouse-glow { 
     position: fixed; 
     top: 0; 
@@ -100,9 +91,7 @@ body {
     position: relative;
     z-index: 2;
 }
-.mobile-nav-btn.active {
-    color: var(--text-main);
-}
+.mobile-nav-btn.active { color: var(--text-main); }
 .nav-underline-glide {
     position: absolute;
     bottom: 5px;
@@ -193,7 +182,7 @@ body.focus-active .day-column.is-today { box-shadow: 0 0 30px rgba(74, 222, 128,
 }
 
 /* =========================================
-   TASK TASK CARDS & LIVE RADAR
+   TASK CARDS & LIVE RADAR
    ========================================= */
 .event { 
     padding: 14px; 
@@ -331,13 +320,21 @@ body.focus-active .day-column.is-today { box-shadow: 0 0 30px rgba(74, 222, 128,
    📱 HIGH-END SMARTPHONE MEDIA QUERY OVERRIDES
    ========================================= */
 @media (max-width: 768px) {
-    .header-section { margin-bottom: 15px; }
-    .title-row { align-items: center; margin-bottom: 15px; }
-    .title h1 { font-size: 22px; }
-    .week-toggle-btn { padding: 8px 16px; font-size: 12px; }
-    .controls-top { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 15px; }
+    body {
+        padding: 15px 10px;
+        overflow-x: hidden;
+        overflow-y: auto; /* UNLOCKS VERTICAL SCROLL */
+    }
+    .header-section { margin-bottom: 10px; }
+    
+    /* FIX: Stacks title and button properly */
+    .title-row { flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 15px; }
+    .week-toggle-btn { width: 100%; text-align: center; padding: 12px; font-size: 14px; }
+    .title h1 { font-size: 26px; margin-bottom: 2px; }
+    
+    .controls-top { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 12px; }
     .btn-secondary { justify-content: center; padding: 10px; font-size: 12px; }
-    .insights-wrapper, .filter-bar { padding: 14px; margin-bottom: 15px; border-radius: 10px; }
+    .insights-wrapper, .filter-bar { padding: 12px 16px; margin-bottom: 12px; border-radius: 10px; }
     
     .mobile-nav-ribbon, .mobile-fab-add { display: flex; }
     
