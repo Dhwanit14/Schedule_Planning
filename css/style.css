@@ -27,12 +27,9 @@ body {
 /* Fluid Viewport Scale Lock for Mobile Layouts */
 @media (max-width: 768px) {
     body {
-        padding: 15px;
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        box-sizing: border-box;
+        padding: 15px 10px;
+        overflow-x: hidden; /* Still prevents accidental horizontal wobbling */
+        overflow-y: auto;   /* Unlocks vertical scrolling! */
     }
 }
 
@@ -348,7 +345,9 @@ body.focus-active .day-column.is-today { box-shadow: 0 0 30px rgba(74, 222, 128,
     .calendar-container {
         position: relative;
         overflow: hidden;
-        height: calc(100vh - 290px);
+        height: auto; /* Let it grow naturally instead of squishing */
+        min-height: 500px; /* Ensure the cards have plenty of swipe room */
+        margin-top: 10px;
     }
     .calendar-grid {
         display: flex;
