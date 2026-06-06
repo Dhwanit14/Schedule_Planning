@@ -364,17 +364,30 @@ body.focus-active .day-column.is-today { box-shadow: 0 0 30px rgba(74, 222, 128,
         height: 100%;
         scroll-snap-align: start;
         box-sizing: border-box;
-        border-radius: 0;
-        background: transparent;
-        border: none;
-        padding: 5px;
+        border-radius: 12px;
+        background: rgba(30, 41, 59, 0.4); /* Restores the visible card background */
+        border: 1px solid var(--border-color); /* Restores the card border */
+        padding: 15px;
         overflow-y: auto;
-        animation: none; /* Handled via scrolling state */
+        animation: none; 
         opacity: 1;
     }
-    .day-name { display: none; }
-    .add-task-btn { display: none; } /* Handled via Floating FAB Button */
     
+    /* Un-hide the day names and center them for mobile */
+    .day-name { 
+        display: block; 
+        text-align: center; 
+        border-bottom: none; 
+        margin-bottom: 20px; 
+        color: var(--color-accent);
+    }
+    
+    /* Un-hide the Add Task buttons so you can actually click them! */
+    .add-task-btn { 
+        display: block; 
+        margin-top: 20px; 
+    }
+
     /* Bottom Drawer Sheet Lift Configuration */
     .modal-overlay { align-items: flex-end; }
     .modal {
