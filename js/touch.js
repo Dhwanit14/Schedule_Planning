@@ -1,41 +1,32 @@
 /* =========================================
-   MOBILE TOUCH & SWIPE ENGINE
+   MOBILE TOUCH ENGINE (LONG-PRESS UPDATE)
    ========================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Wait a brief moment to ensure the grid is fully rendered by main.js
+    // Wait a brief moment to ensure the grid is fully rendered
     setTimeout(initTouchInteractions, 300);
 });
 
 function initTouchInteractions() {
-    // 1. HORIZONTAL CAROUSEL SNAP & RIBBON SYNC
     const grid = document.querySelector('.calendar-grid');
     if (!grid) return;
 
-    // Use IntersectionObserver to detect which day is currently visible on the phone screen
-    const observerOptions = {
-        root: grid,
-        rootMargin: '0px',
-        threshold: 0.6 // Trigger when a column is 60% visible in the viewport
-    };
-
+    // 1. HORIZONTAL CAROUSEL SNAP & RIBBON SYNC (Unchanged)
+    const observerOptions = { root: grid, rootMargin: '0px', threshold: 0.6 };
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                const activeId = entry.target.id; // e.g., 'col-Monday'
+                const activeId = entry.target.id;
                 const dayName = activeId.split('-')[1];
                 updateMobileRibbon(dayName);
             }
         });
     }, observerOptions);
 
-    // Observe all day columns
-    document.querySelectorAll('.day-column').forEach(col => {
-        observer.observe(col);
-    });
+    document.querySelectorAll('.day-column').forEach(col => observer.observe(col));
 
-    // 2. SLIDE-TO-REVEAL QUICK ACTIONS (Swipe Left to Delete)
-    bindSwipeToDelete();
+    // 2. LONG PRESS (Hold to open actions)
+    bindCardLongPress();
 }
 
 function updateMobileRibbon(activeDay) {
@@ -43,89 +34,82 @@ function updateMobileRibbon(activeDay) {
     const activeIndex = daysOfWeekArray.indexOf(activeDay);
     if (activeIndex === -1) return;
 
-    // Update button colors to highlight the active day
     const btns = document.querySelectorAll('.mobile-nav-btn');
     btns.forEach((btn, index) => {
-        if (index === activeIndex) {
-            btn.classList.add('active');
-        } else {
-            btn.classList.remove('active');
-        }
+        btn.classList.toggle('active', index === activeIndex);
     });
 
-    // Move the neon glide underline smoothly to the new active day
     const glide = document.getElementById('nav-glide');
-    if (glide) {
-        // Moves the underline by 100% of its own width per day step
-        glide.style.transform = `translateX(${activeIndex * 100}%)`;
-    }
+    if (glide) glide.style.transform = `translateX(${activeIndex * 100}%)`;
 }
 
-function bindSwipeToDelete() {
+function bindCardLongPress() {
     const grid = document.getElementById('calendar-grid');
-    let startX = 0;
-    let currentX = 0;
+    let pressTimer;
     let activeCard = null;
+    let startX = 0, startY = 0;
 
-    // When the user touches a task card...
+    // When the finger touches the card...
     grid.addEventListener('touchstart', (e) => {
-        // Ensure we are only grabbing task cards, not the background
         const card = e.target.closest('.event');
         if (!card) return;
-        
-        startX = e.touches[0].clientX;
+
         activeCard = card;
-        activeCard.style.transition = 'none'; // Remove CSS transition for direct 1:1 finger tracking
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+
+        // Add a visual CSS class to show it is being pressed down
+        card.classList.add('pressing-card');
+
+        // Start the hold timer (450 milliseconds)
+        pressTimer = setTimeout(() => {
+            // Trigger a physical phone vibration!
+            if (navigator.vibrate) navigator.vibrate(40); 
+            
+            card.classList.remove('pressing-card');
+            const taskId = card.id.replace('task-', '');
+            
+            // Set the target ID for main.js to use
+            ctxSelectedId = taskId;
+            
+            // Trigger the menu to slide up from the bottom
+            const menu = document.getElementById('context-menu');
+            if (menu) {
+                menu.style.display = 'block';
+                menu.classList.add('mobile-active'); 
+            }
+        }, 450); 
     }, { passive: true });
 
-    // As the user drags their finger...
+    // Cancel the press if they start dragging their finger (scrolling)
     grid.addEventListener('touchmove', (e) => {
         if (!activeCard) return;
-        currentX = e.touches[0].clientX;
-        const diffX = currentX - startX;
-
-        // Only allow sliding to the left (negative diff) and cap it at -90px
-        if (diffX < 0 && diffX > -90) {
-            activeCard.style.transform = `translateX(${diffX}px)`;
-            
-            // If swiped far enough, pulse the border red to indicate danger
-            if (diffX < -60) {
-                activeCard.style.borderColor = '#ef4444';
-                activeCard.style.boxShadow = '-10px 0 20px rgba(239, 68, 68, 0.2)';
-            } else {
-                activeCard.style.borderColor = 'rgba(255, 255, 255, 0.05)';
-                activeCard.style.boxShadow = 'none';
-            }
+        const moveX = e.touches[0].clientX;
+        const moveY = e.touches[0].clientY;
+        
+        // If finger moves more than 10 pixels, it's a scroll, not a hold
+        if (Math.abs(moveX - startX) > 10 || Math.abs(moveY - startY) > 10) {
+            clearTimeout(pressTimer);
+            activeCard.classList.remove('pressing-card');
+            activeCard = null;
         }
     }, { passive: true });
 
-    // When the user lets go...
-    grid.addEventListener('touchend', (e) => {
-        if (!activeCard) return;
-        // Restore smooth CSS animation for the snap-back or delete
-        activeCard.style.transition = 'all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1)'; 
-        
-        const diffX = currentX - startX;
-        
-        // If swiped past the "danger" threshold, trigger the delete action
-        if (diffX < -60) {
-            const taskId = activeCard.id.replace('task-', '');
-            if (confirm('Delete this task?')) {
-                ctxSelectedId = taskId;
-                ctxAction('delete'); // Calls the delete function from main.js
-            } else {
-                // If they cancel, snap the card back to normal
-                activeCard.style.transform = `translateX(0)`;
-                activeCard.style.borderColor = 'rgba(255, 255, 255, 0.05)';
-                activeCard.style.boxShadow = 'none';
-            }
-        } else {
-            // If they didn't swipe far enough, snap it back
-            activeCard.style.transform = `translateX(0)`;
-            activeCard.style.borderColor = 'rgba(255, 255, 255, 0.05)';
-            activeCard.style.boxShadow = 'none';
+    // Cancel the press if they let go early (Standard Tap)
+    grid.addEventListener('touchend', () => {
+        clearTimeout(pressTimer);
+        if (activeCard) {
+            activeCard.classList.remove('pressing-card');
+            activeCard = null;
         }
-        
-        activeCard = null; // Reset
+    }, { passive: true });
+    
+    // Hide the action menu when tapping anywhere else on the screen
+    document.addEventListener('touchstart', (e) => {
+        const menu = document.getElementById('context-menu');
+        if (menu && !e.target.closest('#context-menu') && !e.target.closest('.event')) {
+            menu.style.display = 'none';
+            menu.classList.remove('mobile-active');
+        }
     });
 }
