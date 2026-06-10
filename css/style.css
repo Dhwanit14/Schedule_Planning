@@ -396,4 +396,38 @@ body.focus-active .day-column.is-today { box-shadow: 0 0 30px rgba(74, 222, 128,
         padding: 24px;
         animation: mobileSheetLift 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
     }
+    /* The visual squish when holding a card */
+    .pressing-card {
+        transform: scale(0.94) !important;
+        filter: brightness(0.7);
+        transition: all 0.2s ease-out !important;
+    }
+
+    /* Upgrades the context menu into a mobile Bottom Drawer */
+    #context-menu.mobile-active {
+        position: fixed !important;
+        top: auto !important;
+        bottom: 20px !important;
+        left: 10px !important;
+        right: 10px !important;
+        width: calc(100% - 20px) !important;
+        border-radius: 16px;
+        padding: 10px;
+        animation: mobileSheetLift 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        /* Adds a dark overlay behind the menu */
+        box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 0 1000px rgba(2, 6, 23, 0.7);
+        z-index: 9999;
+    }
+    
+    #context-menu.mobile-active button {
+        padding: 18px;
+        font-size: 16px;
+        font-weight: 600;
+        text-align: center;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    
+    #context-menu.mobile-active button:last-child {
+        border-bottom: none;
+    }
 }
